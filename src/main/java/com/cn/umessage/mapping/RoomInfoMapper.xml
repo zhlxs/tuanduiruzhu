@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.umessage.dao.RoomInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.cn.umessage.pojo.RoomInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="hotelcode" property="hotelcode" jdbcType="VARCHAR" />
+    <result column="roomno" property="roomno" jdbcType="VARCHAR" />
+    <result column="roomaddress" property="roomaddress" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, hotelcode, roomno, roomaddress
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from roominfo
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+   <select id="selectByRoomno" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from roominfo
+    where roomno = #{roomno,jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from roominfo
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cn.umessage.pojo.RoomInfo" >
+    insert into roominfo (id, hotelcode, roomno, 
+      roomaddress)
+    values (#{id,jdbcType=INTEGER}, #{hotelcode,jdbcType=VARCHAR}, #{roomno,jdbcType=VARCHAR}, 
+      #{roomaddress,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.umessage.pojo.RoomInfo" >
+    insert into roominfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="hotelcode != null" >
+        hotelcode,
+      </if>
+      <if test="roomno != null" >
+        roomno,
+      </if>
+      <if test="roomaddress != null" >
+        roomaddress,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="hotelcode != null" >
+        #{hotelcode,jdbcType=VARCHAR},
+      </if>
+      <if test="roomno != null" >
+        #{roomno,jdbcType=VARCHAR},
+      </if>
+      <if test="roomaddress != null" >
+        #{roomaddress,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cn.umessage.pojo.RoomInfo" >
+    update roominfo
+    <set >
+      <if test="hotelcode != null" >
+        hotelcode = #{hotelcode,jdbcType=VARCHAR},
+      </if>
+      <if test="roomno != null" >
+        roomno = #{roomno,jdbcType=VARCHAR},
+      </if>
+      <if test="roomaddress != null" >
+        roomaddress = #{roomaddress,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cn.umessage.pojo.RoomInfo" >
+    update roominfo
+    set hotelcode = #{hotelcode,jdbcType=VARCHAR},
+      roomno = #{roomno,jdbcType=VARCHAR},
+      roomaddress = #{roomaddress,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

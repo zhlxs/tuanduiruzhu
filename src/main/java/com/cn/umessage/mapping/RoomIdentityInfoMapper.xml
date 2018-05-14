@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.umessage.dao.RoomIdentityInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.cn.umessage.pojo.RoomIdentityInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="roomnum" property="roomnum" jdbcType="VARCHAR" />
+    <result column="identity" property="identity" jdbcType="VARCHAR" />
+    <result column="checkInTime" property="checkInTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, roomnum, identity,checkInTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from room_identityinfo
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from room_identityinfo
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cn.umessage.pojo.RoomIdentityInfo" keyProperty="id" useGeneratedKeys="true">
+    insert into room_identityinfo (id, roomnum, identity,checkInTime
+      )
+    values (#{id,jdbcType=INTEGER}, #{roomnum,jdbcType=VARCHAR}, #{identity,jdbcType=VARCHAR},#{checkInTime,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.umessage.pojo.RoomIdentityInfo" >
+    insert into room_identityinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="roomnum != null" >
+        roomnum,
+      </if>
+      <if test="identity != null" >
+        identity,
+      </if>
+      <if test="checkInTime != null" >
+        checkInTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="roomnum != null" >
+        #{roomnum,jdbcType=VARCHAR},
+      </if>
+      <if test="identity != null" >
+        #{identity,jdbcType=VARCHAR},
+      </if>
+      <if test="checkInTime != null" >
+        #{checkInTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cn.umessage.pojo.RoomIdentityInfo" >
+    update room_identityinfo
+    <set >
+      <if test="roomnum != null" >
+        roomnum = #{roomnum,jdbcType=VARCHAR},
+      </if>
+      <if test="identity != null" >
+        identity = #{identity,jdbcType=VARCHAR},
+      </if>
+      <if test="checkInTime != null" >
+        checkInTime = #{checkInTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cn.umessage.pojo.RoomIdentityInfo" >
+    update room_identityinfo
+    set roomnum = #{roomnum,jdbcType=VARCHAR},
+      identity = #{identity,jdbcType=VARCHAR},
+      checkInTime = #{checkInTime,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

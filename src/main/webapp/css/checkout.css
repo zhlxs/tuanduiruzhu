@@ -1,0 +1,138 @@
+.content_box {
+  width: 50%;
+  height: 30%;
+  margin: auto;
+  text-align: center;
+  font-size: 18px;
+}
+#into ,#readfail,#loading,#sendcard,#cardinfo,#loading_out{
+  width: 100% ;
+  height: 50%;
+  margin: auto;
+  display: none;
+}
+#into>div{
+	width: 423px ;
+  height: 270px;
+  margin: auto;
+}
+#into img {
+  width: 100%;
+  height: 100%;
+}
+#into button{
+	margin-top: 40px
+}
+.content_box > p {
+  margin: 7px auto 14px;
+}
+.remove {
+  width: 116px;
+  height: 38px;
+  background: #80a3c5;
+  color: #fff;
+  border: 1px solid #80a3c5;
+  letter-spacing: 2px;
+  position: fixed;
+  top: 1325px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 14px;
+}
+.remove:active {
+  opacity: 0.8;
+}
+
+#cardinfo>p:first-child+p{
+	color:red;
+}
+#cardinfo button {
+  position:fixed;
+  top: 1237px;
+  width: 116px;
+  height: 38px;
+  font-size: 14px;
+}
+.but_1{
+	background: #fff;
+	color: #80a3c5;
+  border: 1px solid #80a3c5;
+	border-color:#80a3c5 ;
+  left: 374px;
+}
+.but_2{
+	background: #80a3c5;
+	color: #fff;
+  right: 374px;
+	border-color:#80a3c5 ;
+}
+#successtf .cs {
+  color: red;
+  margin-top: 30px;
+}
+#successtf {
+  font-size: 16px;
+}
+#successtf h4{
+  font-weight: 600;
+  font-size: 22px;
+  margin-bottom: 35px;
+}
+#successtf>p {
+  margin: 7px auto 4px;
+}
+.tf_succ {
+  background: url("../img/successful_icon.png") no-repeat;
+  background-size: 100% 100%;
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
+#successtf .puestions {
+  font-size: 16px;
+  color: #434141;
+  margin: 25px auto 70px;
+}
+.pues_pic {
+  background: url("../img/red.png") no-repeat;
+  background-size: 100% 100%;
+  width: 10px;
+  height: 10px;
+  margin-right: 10px;
+}
+.gb {
+    background: #80a3c5;
+  border: 1px solid #80a3c5;
+  color: #fff;
+  position: fixed;
+  top: 1239px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  width: 116px;
+  height: 38px;
+  font-size: 14px;
+}
+#card_myModal,
+#nopp_myModal {
+  width: 478px;
+  height: 254px;
+  margin: auto;
+}
+.again,
+.nopp {
+  display: block;
+  width: 30px;
+  height: 30px;
+  margin: auto;
+  background: url("../img/failure.png") no-repeat;
+  background-size: 100% 100%;
+  margin-bottom: 12px;
+}
+.nopp {
+  background: url("../img/prompt_icon2x.png") no-repeat;
+  background-size: 100% 100%;
+}
+.modal-footer {
+  padding-top: 20px;
+}

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cn.umessage.dao.WxpmsDaoMapper">
+
+    <!-- 表 -->
+    <sql id="Table_Name">
+        weixin_wxpms
+    </sql>
+
+    <!-- 字段 -->
+    <sql id="Base_Column_List">
+        id,mpcfgid,pmskey,pmsname,pmsurl,
+        pmsclient,appkey,secret,username,passwords,
+        encoding,bookNum,qcurl,ts,num1,
+        str1,str2
+    </sql>
+
+    <!-- 新增 -->
+    <insert id="addBean" parameterType="com.cn.umessage.pojo.Wxpms">
+        INSERT INTO
+        <include refid="Table_Name" />
+        (
+        <include refid="Base_Column_List" />
+        ) VALUES
+        (
+        #{id},#{mpcfgid},#{pmskey},#{pmsname},#{pmsurl},
+        #{pmsclient},#{appkey},#{secret},#{username},#{passwords},
+        #{encoding},#{bookNum},#{qcurl},#{ts},#{num1},
+        #{str1},#{str2}
+        )
+    </insert>
+
+    <!-- 修改 -->
+    <update id="updateBean" parameterType="com.cn.umessage.pojo.Wxpms">
+        UPDATE
+        <include refid="Table_Name" />
+        <set>
+            <include refid="updateSQL"/>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <!-- 删除 -->
+    <delete id="deleteBean" parameterType="java.lang.String">
+        DELETE FROM
+        <include refid="Table_Name" />
+        WHERE id = #{id}
+    </delete>
+    
+    <delete id="deleteMpId" parameterType="java.lang.String">
+        DELETE FROM
+        <include refid="Table_Name" />
+        WHERE mpcfgid = #{mpcfgid}
+    </delete>
+
+    <!-- 查询单个 -->
+    <select id="queryBean" parameterType="java.lang.String" resultType="com.cn.umessage.pojo.Wxpms">
+        SELECT <include refid="Base_Column_List" /> FROM 
+        <include refid="Table_Name" />
+        WHERE id = #{id}
+    </select>
+    
+    <select id="queryPmsByMpid" parameterType="java.lang.String" resultType="com.cn.umessage.pojo.Wxpms">
+        SELECT <include refid="Base_Column_List" /> FROM 
+        <include refid="Table_Name" />
+        WHERE mpcfgid = #{mpcfgid}
+    </select>
+
+    <!-- 查询所有 -->
+    <select id="queryAll" parameterType="java.util.Map" resultType="com.cn.umessage.pojo.Wxpms">
+        SELECT <include refid="Base_Column_List" /> FROM 
+        <include refid="Table_Name" />
+        <include refid="condition" />
+        <include refid="splitPages" />
+    </select>
+
+    <!-- 查询总数 -->
+    <select id="queryCount" parameterType="java.util.Map" resultType="java.lang.Long">
+        SELECT COUNT(*) FROM 
+        <include refid="Table_Name" />
+        <include refid="condition" />
+    </select>
+
+    <sql id="updateSQL">
+        <if test="mpcfgid != null">mpcfgid = #{mpcfgid},</if>
+        <if test="pmskey != null">pmskey = #{pmskey},</if>
+        <if test="pmsname != null">pmsname = #{pmsname},</if>
+        <if test="pmsurl != null">pmsurl = #{pmsurl},</if>
+        <if test="pmsclient != null">pmsclient = #{pmsclient},</if>
+        <if test="appkey != null">appkey = #{appkey},</if>
+        <if test="secret != null">secret = #{secret},</if>
+        <if test="username != null">username = #{username},</if>
+        <if test="passwords != null">passwords = #{passwords},</if>
+        <if test="encoding != null">encoding = #{encoding},</if>
+        <if test="bookNum != null">bookNum = #{bookNum},</if>
+        <if test="qcurl != null">qcurl = #{qcurl},</if>
+        <if test="ts != null">ts = #{ts},</if>
+        <if test="num1 != null">num1 = #{num1},</if>
+        <if test="str1 != null">str1 = #{str1},</if>
+        <if test="str2 != null">str2 = #{str2},</if>
+
+    </sql>
+
+    <sql id="condition">
+        <where>
+            <if test="mpcfgid != null">AND mpcfgid = #{mpcfgid} </if>
+            <if test="pmskey != null">AND pmskey = #{pmskey} </if>
+            <if test="pmsname != null">AND pmsname = #{pmsname} </if>
+            <if test="pmsurl != null">AND pmsurl = #{pmsurl} </if>
+            <if test="pmsclient != null">AND pmsclient = #{pmsclient} </if>
+            <if test="appkey != null">AND appkey = #{appkey} </if>
+            <if test="secret != null">AND secret = #{secret} </if>
+            <if test="username != null">AND username = #{username} </if>
+            <if test="passwords != null">AND passwords = #{passwords} </if>
+            <if test="encoding != null">AND encoding = #{encoding} </if>
+            <if test="bookNum != null">AND bookNum = #{bookNum} </if>
+            <if test="qcurl != null">AND qcurl = #{qcurl} </if>
+            <if test="ts != null">AND ts = #{ts} </if>
+            <if test="num1 != null">AND num1 = #{num1} </if>
+            <if test="str1 != null">AND str1 = #{str1} </if>
+            <if test="str2 != null">AND str2 = #{str2} </if>
+
+            <if test="skey != null">AND id LIKE concat('%',#{skey},'%')</if>
+      </where>
+    </sql>
+
+    <sql id="splitPages">
+        <if test="sortFiled != null">
+            ORDER BY ${sortFiled}
+        </if>
+        <if test="sortFiled != null and direction != null ">
+            ${direction}
+        </if>
+        <if test="start!=null">
+            LIMIT #{start}
+        </if>
+        <if test="start!=null and perpage!=null">
+            ,#{perpage}
+        </if>
+    </sql>
+
+</mapper>

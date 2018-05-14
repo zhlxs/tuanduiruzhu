@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.umessage.dao.AdvertisingMapper" >
+  <resultMap id="BaseResultMap" type="com.cn.umessage.pojo.Advertising" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="hotelcode" property="hotelcode" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="caption" property="caption" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.cn.umessage.pojo.Advertising" extends="BaseResultMap" >
+    <result column="img" property="img" jdbcType="LONGVARBINARY" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, hotelcode, type, caption
+  </sql>
+  <sql id="Blob_Column_List" >
+    img
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from picinfo
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectAll" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from picinfo
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from picinfo
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cn.umessage.pojo.Advertising" >
+    insert into picinfo (id, hotelcode, type, 
+      caption, img)
+    values (#{id,jdbcType=INTEGER}, #{hotelcode,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{caption,jdbcType=VARCHAR}, #{img,jdbcType=LONGVARBINARY})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.umessage.pojo.Advertising" >
+    insert into picinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="hotelcode != null" >
+        hotelcode,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="caption != null" >
+        caption,
+      </if>
+      <if test="img != null" >
+        img,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="hotelcode != null" >
+        #{hotelcode,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="caption != null" >
+        #{caption,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null" >
+        #{img,jdbcType=LONGVARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cn.umessage.pojo.Advertising" >
+    update picinfo
+    <set >
+      <if test="hotelcode != null" >
+        hotelcode = #{hotelcode,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="caption != null" >
+        caption = #{caption,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null" >
+        img = #{img,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.cn.umessage.pojo.Advertising" >
+    update picinfo
+    set hotelcode = #{hotelcode,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      caption = #{caption,jdbcType=VARCHAR},
+      img = #{img,jdbcType=LONGVARBINARY}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cn.umessage.pojo.Advertising" >
+    update picinfo
+    set hotelcode = #{hotelcode,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      caption = #{caption,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

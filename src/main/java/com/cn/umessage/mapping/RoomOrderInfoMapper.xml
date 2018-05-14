@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.umessage.dao.RoomOrderInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.cn.umessage.pojo.RoomOrderInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="roomnum" property="roomnum" jdbcType="VARCHAR" />
+    <result column="ordernum" property="ordernum" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, roomnum, ordernum
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from room_orderinfo
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from room_orderinfo
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cn.umessage.pojo.RoomOrderInfo" keyProperty="id" useGeneratedKeys="true">
+    insert into room_orderinfo (id, roomnum, ordernum
+      )
+    values (#{id,jdbcType=INTEGER}, #{roomnum,jdbcType=VARCHAR}, #{ordernum,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.umessage.pojo.RoomOrderInfo" >
+    insert into room_orderinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="roomnum != null" >
+        roomnum,
+      </if>
+      <if test="ordernum != null" >
+        ordernum,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="roomnum != null" >
+        #{roomnum,jdbcType=VARCHAR},
+      </if>
+      <if test="ordernum != null" >
+        #{ordernum,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cn.umessage.pojo.RoomOrderInfo" >
+    update room_orderinfo
+    <set >
+      <if test="roomnum != null" >
+        roomnum = #{roomnum,jdbcType=VARCHAR},
+      </if>
+      <if test="ordernum != null" >
+        ordernum = #{ordernum,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cn.umessage.pojo.RoomOrderInfo" >
+    update room_orderinfo
+    set roomnum = #{roomnum,jdbcType=VARCHAR},
+      ordernum = #{ordernum,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

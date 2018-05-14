@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.umessage.dao.DepositInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.cn.umessage.pojo.DepositInfo" >
+    <id column="accnt" property="accnt" jdbcType="VARCHAR" />
+    <result column="isSelfMachine" property="isselfmachine" jdbcType="VARCHAR" />
+    <result column="amount" property="amount" jdbcType="VARCHAR" />
+    <result column="consumptionAmount" property="consumptionamount" jdbcType="VARCHAR" />
+    <result column="refundAmount" property="refundamount" jdbcType="VARCHAR" />
+    <result column="refundStatus" property="refundstatus" jdbcType="VARCHAR" />
+    <result column="reserve1" property="reserve1" jdbcType="VARCHAR" />
+    <result column="reserve2" property="reserve2" jdbcType="VARCHAR" />
+    <result column="mpcfgid" property="mpcfgid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    accnt, isSelfMachine, amount, consumptionAmount, refundAmount, refundStatus, reserve1, 
+    reserve2,mpcfgid
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from weixin_deposit
+    where accnt = #{accnt,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from weixin_deposit
+    where accnt = #{accnt,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.cn.umessage.pojo.DepositInfo" >
+    insert into weixin_deposit (accnt, isSelfMachine, amount, 
+      consumptionAmount, refundAmount, refundStatus, 
+      reserve1, reserve2,mpcfgid)
+    values (#{accnt,jdbcType=VARCHAR}, #{isselfmachine,jdbcType=VARCHAR}, #{amount,jdbcType=VARCHAR}, 
+      #{consumptionamount,jdbcType=VARCHAR}, #{refundamount,jdbcType=VARCHAR}, #{refundstatus,jdbcType=VARCHAR}, 
+      #{reserve1,jdbcType=VARCHAR}, #{reserve2,jdbcType=VARCHAR}, #{mpcfgid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.umessage.pojo.DepositInfo" >
+    insert into weixin_deposit
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="accnt != null" >
+        accnt,
+      </if>
+      <if test="isselfmachine != null" >
+        isSelfMachine,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="consumptionamount != null" >
+        consumptionAmount,
+      </if>
+      <if test="refundamount != null" >
+        refundAmount,
+      </if>
+      <if test="refundstatus != null" >
+        refundStatus,
+      </if>
+      <if test="reserve1 != null" >
+        reserve1,
+      </if>
+      <if test="reserve2 != null" >
+        reserve2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="accnt != null" >
+        #{accnt,jdbcType=VARCHAR},
+      </if>
+      <if test="isselfmachine != null" >
+        #{isselfmachine,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=VARCHAR},
+      </if>
+      <if test="consumptionamount != null" >
+        #{consumptionamount,jdbcType=VARCHAR},
+      </if>
+      <if test="refundamount != null" >
+        #{refundamount,jdbcType=VARCHAR},
+      </if>
+      <if test="refundstatus != null" >
+        #{refundstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve1 != null" >
+        #{reserve1,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve2 != null" >
+        #{reserve2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cn.umessage.pojo.DepositInfo" >
+    update weixin_deposit
+    <set >
+      <if test="isselfmachine != null" >
+        isSelfMachine = #{isselfmachine,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=VARCHAR},
+      </if>
+      <if test="consumptionamount != null" >
+        consumptionAmount = #{consumptionamount,jdbcType=VARCHAR},
+      </if>
+      <if test="refundamount != null" >
+        refundAmount = #{refundamount,jdbcType=VARCHAR},
+      </if>
+      <if test="refundstatus != null" >
+        refundStatus = #{refundstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve1 != null" >
+        reserve1 = #{reserve1,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve2 != null" >
+        reserve2 = #{reserve2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where accnt = #{accnt,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cn.umessage.pojo.DepositInfo" >
+    update weixin_deposit
+    set isSelfMachine = #{isselfmachine,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=VARCHAR},
+      consumptionAmount = #{consumptionamount,jdbcType=VARCHAR},
+      refundAmount = #{refundamount,jdbcType=VARCHAR},
+      refundStatus = #{refundstatus,jdbcType=VARCHAR},
+      reserve1 = #{reserve1,jdbcType=VARCHAR},
+      reserve2 = #{reserve2,jdbcType=VARCHAR}
+    where accnt = #{accnt,jdbcType=VARCHAR}
+  </update>
+</mapper>

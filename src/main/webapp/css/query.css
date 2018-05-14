@@ -1,0 +1,232 @@
+﻿.content_box {
+  width: 860px;
+    font-size: 18px;
+    margin: auto;
+    text-align: center;
+    position: fixed;
+    top: 1015px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+#into ,#face_box ,#readfail,#loading,#sendcard,#cardinfo,#idcard,#nopp_myModal{
+  width: 100% ;
+  height: 50%;
+  margin: auto;
+  display: none;
+}
+#into>div,#idcard>div{
+	width: 50% ;
+  height: 50%;
+  margin: auto;
+}
+#into img,#idcard img {
+  width: 423px;
+  height: 270px;
+}
+#into button,#idcard button{
+	margin-top: 40px
+}
+.content_box > p {
+  margin: 7px auto 14px;
+}
+.remove {
+  width: 116px;
+  height: 38px;
+  background: #80a3c5;
+  color: #fff;
+  border: 1px solid #80a3c5;
+  letter-spacing: 2px;
+  font-size: 14px;
+  position: fixed;
+  top: 1325px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.remove:active {
+  opacity: 0.8;
+}
+.but_1{
+	background: #fff;
+	color: #0258cc;
+	border-color:#0258cc 
+}
+.but_2{
+	background: #0258cc;
+	color: #fff
+}
+.again {
+  display: block;
+  width: 30px;
+  height: 30px;
+  margin:0 auto 10px;
+  background: url("../img/failure.png") no-repeat;
+  background-size: 100% 100%;
+}
+.again_btn {
+  width: 116px;
+  height: 38px;
+  background: #0258cc;
+  border-color: 　#0258cc;
+  color: #fff;
+}
+.modal-footer {
+  padding-top: 20px;
+}
+.btn-default:hover {
+  opacity: 0.8;
+  background: #0258cc;
+  border-color: 　#0258cc;
+  color: #fff;
+}
+.room_card {
+  width: 389px;
+  height: 223px;
+  margin: auto;
+  background: url("../img/card_bj.png") no-repeat;
+  background-size: 100% 100%;
+  position: relative;
+  font-size: 20px;
+}
+.room_card > p {
+  position: absolute;
+}
+.rc_top {
+  top: 20px;
+  left: 30px;
+  letter-spacing: 20px;
+  font-size: 16px;
+}
+.rc_center {
+  width: 100%;
+  text-align: center;
+  top: 28%;
+  font-size: 12px;
+}
+.rc_center i {
+    font-size: 38px;
+    vertical-align: sub;
+    margin-left: 5px;
+}
+.rc_btm {
+  bottom: 50px;
+  width: 100%;
+  font-size: 14px;
+}
+.rc_btm span {
+  position: absolute;
+}
+.rc_btm span:first-child {
+  left: 30px;
+}
+.rc_btm span:last-child {
+  right: 30px;
+}
+.no_cards {
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+}
+.no_cards i {
+  width: 10px ;
+  height: 10px;
+  background: url("../img/red.png") no-repeat;
+  background-size: 100% 100%;
+  margin-right: 2px;
+}
+.btns_btm button {
+    position: fixed;
+    top: 1364px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 116px;
+    height: 38px;
+    border: 1px solid #80a3c5;
+    color: #fff;
+    font-size: 14px;
+    background: #80a3c5;
+}
+.gb {
+  background: #80a3c5;
+  border: 1px solid #80a3c5;
+  color: #fff;
+  position: fixed;
+  top: 1239px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  width: 116px; 
+  height: 38px;
+  font-size: 14px;
+}
+#face_box {
+  width: 860px;
+    font-size: 18px;
+    margin: auto;
+    text-align: center;
+    position: fixed;
+    top: 1015px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+#face_box>p {
+  margin: 0px auto 10px;
+}
+#picture {
+  width: 480px;
+  height: 640px;
+  margin: auto;
+  background: #ccc;
+}
+#card_myModal,
+#nopp_myModal {
+  width: 478px;
+  height: 254px;
+  margin: auto;
+}
+
+.again,
+.nopp {
+  display: block;
+  width: 30px;
+  height: 30px;
+  margin: auto;
+  background: url("../img/failure.png") no-repeat;
+  background-size: 100% 100%;
+  margin-bottom: 12px;
+}
+.nopp {
+  background: url("../img/prompt_icon2x.png") no-repeat;
+  background-size: 100% 100%;
+}
+.modal-footer {
+  padding-top: 20px;
+}
+.back {
+    position: fixed;
+    top: 350px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 116px;
+    height: 38px;
+    border: 1px solid #80a3c5;
+    color: #fff;
+    font-size: 14px;
+    background: #80a3c5;
+}
+.sxt_remove {
+  width: 116px;
+  height: 38px;
+  background: #80a3c5;
+  color: #fff;
+  border: 1px solid #80a3c5;
+  letter-spacing: 2px;
+  font-size: 14px;
+  position: fixed;
+  top: 1365px;
+  margin: auto;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.sxt_remove:active {
+	opacity: 0.8;
+}

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.umessage.dao.CodeTableMapper" >
+  <resultMap id="BaseResultMap" type="com.cn.umessage.pojo.CodeTable" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="dmlx" property="dmlx" jdbcType="VARCHAR" />
+    <result column="dmlxmc" property="dmlxmc" jdbcType="VARCHAR" />
+    <result column="dmmc" property="dmmc" jdbcType="VARCHAR" />
+    <result column="dmzm" property="dmzm" jdbcType="VARCHAR" />
+    <result column="yxbz" property="yxbz" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, dmlx, dmlxmc, dmmc, dmzm, yxbz
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from code_table
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="getCodeByTypeANDByName" parameterType="java.lang.String" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" /> 
+    from code_table 
+    where dmlx=#{dmlx,jdbcType=VARCHAR} AND dmmc=#{dmmc,jdbcType=VARCHAR}
+  </select>
+  <select id="getCodeByName" parameterType="java.lang.String" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" /> 
+    from code_table 
+    where  dmlxmc=#{dmlxmc,jdbcType=VARCHAR} AND yxbz=#{yxbz,jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from code_table
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cn.umessage.pojo.CodeTable" >
+    insert into code_table (id, dmlx, dmlxmc, 
+      dmmc, dmzm, yxbz)
+    values (#{id,jdbcType=INTEGER}, #{dmlx,jdbcType=VARCHAR}, #{dmlxmc,jdbcType=VARCHAR}, 
+      #{dmmc,jdbcType=VARCHAR}, #{dmzm,jdbcType=VARCHAR}, #{yxbz,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.umessage.pojo.CodeTable" >
+    insert into code_table
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="dmlx != null" >
+        dmlx,
+      </if>
+      <if test="dmlxmc != null" >
+        dmlxmc,
+      </if>
+      <if test="dmmc != null" >
+        dmmc,
+      </if>
+      <if test="dmzm != null" >
+        dmzm,
+      </if>
+      <if test="yxbz != null" >
+        yxbz,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="dmlx != null" >
+        #{dmlx,jdbcType=VARCHAR},
+      </if>
+      <if test="dmlxmc != null" >
+        #{dmlxmc,jdbcType=VARCHAR},
+      </if>
+      <if test="dmmc != null" >
+        #{dmmc,jdbcType=VARCHAR},
+      </if>
+      <if test="dmzm != null" >
+        #{dmzm,jdbcType=VARCHAR},
+      </if>
+      <if test="yxbz != null" >
+        #{yxbz,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cn.umessage.pojo.CodeTable" >
+    update code_table
+    <set >
+      <if test="dmlx != null" >
+        dmlx = #{dmlx,jdbcType=VARCHAR},
+      </if>
+      <if test="dmlxmc != null" >
+        dmlxmc = #{dmlxmc,jdbcType=VARCHAR},
+      </if>
+      <if test="dmmc != null" >
+        dmmc = #{dmmc,jdbcType=VARCHAR},
+      </if>
+      <if test="dmzm != null" >
+        dmzm = #{dmzm,jdbcType=VARCHAR},
+      </if>
+      <if test="yxbz != null" >
+        yxbz = #{yxbz,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cn.umessage.pojo.CodeTable" >
+    update code_table
+    set dmlx = #{dmlx,jdbcType=VARCHAR},
+      dmlxmc = #{dmlxmc,jdbcType=VARCHAR},
+      dmmc = #{dmmc,jdbcType=VARCHAR},
+      dmzm = #{dmzm,jdbcType=VARCHAR},
+      yxbz = #{yxbz,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

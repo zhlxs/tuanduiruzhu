@@ -1,0 +1,33 @@
+.content_box {
+  text-align: center;
+}
+.content_box > p > i {
+  width: 24px;
+  height: 24px;
+  background: url("../img/prompt_icon.png") no-repeat;
+  background-size: 100% 100%;
+  vertical-align: sub;
+}
+.remove {
+    width: 116px;
+    height: 38px;
+    background: #80a3c5;
+    color: #fff !important;
+    border: 1px solid #80a3c5;
+    letter-spacing: 2px;
+    font-size: 14px;
+    position: fixed;
+    top: 1237px;
+    margin: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    line-height: 38px;
+}
+.remove:active {
+  opacity: 0.8;
+}
+.header {
+}
+.title {
+  font-size: 18px;
+}

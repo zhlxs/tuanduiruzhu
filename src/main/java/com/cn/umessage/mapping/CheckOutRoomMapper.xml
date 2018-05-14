@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.umessage.dao.CheckOutRoomMapper" >
+  <resultMap id="BaseResultMap" type="com.cn.umessage.pojo.CheckOutRoom" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="accnt" property="accnt" jdbcType="VARCHAR" />
+    <result column="resno" property="resno" jdbcType="VARCHAR" />
+    <result column="guestshare" property="guestshare" jdbcType="VARCHAR" />
+    <result column="arrival" property="arrival" jdbcType="VARCHAR" />
+    <result column="departure" property="departure" jdbcType="VARCHAR" />
+    <result column="roomno" property="roomno" jdbcType="VARCHAR" />
+    <result column="roomtype" property="roomtype" jdbcType="VARCHAR" />
+    <result column="roomtypename" property="roomtypename" jdbcType="VARCHAR" />
+    <result column="fname" property="fname" jdbcType="VARCHAR" />
+    <result column="lname" property="lname" jdbcType="VARCHAR" />
+    <result column="idcode" property="idcode" jdbcType="VARCHAR" />
+    <result column="idno" property="idno" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="cardno" property="cardno" jdbcType="VARCHAR" />
+    <result column="cardtype" property="cardtype" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="refundStatus" property="refundstatus" jdbcType="VARCHAR" />
+    <result column="outtime" property="outtime" jdbcType="VARCHAR" />
+    <result column="mpcfgid" property="outtime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, accnt, resno, guestshare, arrival, departure, roomno, roomtype, roomtypename, 
+    fname, lname, idcode, idno, mobile, cardno, cardtype, status, refundStatus, outtime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from weixin_checkoutroom
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByAccnt" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from weixin_checkoutroom
+    where accnt = #{accnt,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from weixin_checkoutroom
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cn.umessage.pojo.CheckOutRoom" >
+    insert into weixin_checkoutroom (id, accnt, resno, 
+      guestshare, arrival, departure, 
+      roomno, roomtype, roomtypename, 
+      fname, lname, idcode, 
+      idno, mobile, cardno, 
+      cardtype, status, refundStatus, 
+      outtime,mpcfgid)
+    values (#{id,jdbcType=INTEGER}, #{accnt,jdbcType=VARCHAR}, #{resno,jdbcType=VARCHAR}, 
+      #{guestshare,jdbcType=VARCHAR}, #{arrival,jdbcType=VARCHAR}, #{departure,jdbcType=VARCHAR}, 
+      #{roomno,jdbcType=VARCHAR}, #{roomtype,jdbcType=VARCHAR}, #{roomtypename,jdbcType=VARCHAR}, 
+      #{fname,jdbcType=VARCHAR}, #{lname,jdbcType=VARCHAR}, #{idcode,jdbcType=VARCHAR}, 
+      #{idno,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{cardno,jdbcType=VARCHAR}, 
+      #{cardtype,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{refundstatus,jdbcType=VARCHAR}, 
+      #{outtime,jdbcType=VARCHAR},#{mpcfgid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.umessage.pojo.CheckOutRoom" >
+    insert into weixin_checkoutroom
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="accnt != null" >
+        accnt,
+      </if>
+      <if test="resno != null" >
+        resno,
+      </if>
+      <if test="guestshare != null" >
+        guestshare,
+      </if>
+      <if test="arrival != null" >
+        arrival,
+      </if>
+      <if test="departure != null" >
+        departure,
+      </if>
+      <if test="roomno != null" >
+        roomno,
+      </if>
+      <if test="roomtype != null" >
+        roomtype,
+      </if>
+      <if test="roomtypename != null" >
+        roomtypename,
+      </if>
+      <if test="fname != null" >
+        fname,
+      </if>
+      <if test="lname != null" >
+        lname,
+      </if>
+      <if test="idcode != null" >
+        idcode,
+      </if>
+      <if test="idno != null" >
+        idno,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="cardno != null" >
+        cardno,
+      </if>
+      <if test="cardtype != null" >
+        cardtype,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="refundstatus != null" >
+        refundStatus,
+      </if>
+      <if test="outtime != null" >
+        outtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="accnt != null" >
+        #{accnt,jdbcType=VARCHAR},
+      </if>
+      <if test="resno != null" >
+        #{resno,jdbcType=VARCHAR},
+      </if>
+      <if test="guestshare != null" >
+        #{guestshare,jdbcType=VARCHAR},
+      </if>
+      <if test="arrival != null" >
+        #{arrival,jdbcType=VARCHAR},
+      </if>
+      <if test="departure != null" >
+        #{departure,jdbcType=VARCHAR},
+      </if>
+      <if test="roomno != null" >
+        #{roomno,jdbcType=VARCHAR},
+      </if>
+      <if test="roomtype != null" >
+        #{roomtype,jdbcType=VARCHAR},
+      </if>
+      <if test="roomtypename != null" >
+        #{roomtypename,jdbcType=VARCHAR},
+      </if>
+      <if test="fname != null" >
+        #{fname,jdbcType=VARCHAR},
+      </if>
+      <if test="lname != null" >
+        #{lname,jdbcType=VARCHAR},
+      </if>
+      <if test="idcode != null" >
+        #{idcode,jdbcType=VARCHAR},
+      </if>
+      <if test="idno != null" >
+        #{idno,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="cardno != null" >
+        #{cardno,jdbcType=VARCHAR},
+      </if>
+      <if test="cardtype != null" >
+        #{cardtype,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="refundstatus != null" >
+        #{refundstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="outtime != null" >
+        #{outtime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cn.umessage.pojo.CheckOutRoom" >
+    update weixin_checkoutroom
+    <set >
+      <if test="accnt != null" >
+        accnt = #{accnt,jdbcType=VARCHAR},
+      </if>
+      <if test="resno != null" >
+        resno = #{resno,jdbcType=VARCHAR},
+      </if>
+      <if test="guestshare != null" >
+        guestshare = #{guestshare,jdbcType=VARCHAR},
+      </if>
+      <if test="arrival != null" >
+        arrival = #{arrival,jdbcType=VARCHAR},
+      </if>
+      <if test="departure != null" >
+        departure = #{departure,jdbcType=VARCHAR},
+      </if>
+      <if test="roomno != null" >
+        roomno = #{roomno,jdbcType=VARCHAR},
+      </if>
+      <if test="roomtype != null" >
+        roomtype = #{roomtype,jdbcType=VARCHAR},
+      </if>
+      <if test="roomtypename != null" >
+        roomtypename = #{roomtypename,jdbcType=VARCHAR},
+      </if>
+      <if test="fname != null" >
+        fname = #{fname,jdbcType=VARCHAR},
+      </if>
+      <if test="lname != null" >
+        lname = #{lname,jdbcType=VARCHAR},
+      </if>
+      <if test="idcode != null" >
+        idcode = #{idcode,jdbcType=VARCHAR},
+      </if>
+      <if test="idno != null" >
+        idno = #{idno,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="cardno != null" >
+        cardno = #{cardno,jdbcType=VARCHAR},
+      </if>
+      <if test="cardtype != null" >
+        cardtype = #{cardtype,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="refundstatus != null" >
+        refundStatus = #{refundstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="outtime != null" >
+        outtime = #{outtime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cn.umessage.pojo.CheckOutRoom" >
+    update weixin_checkoutroom
+    set accnt = #{accnt,jdbcType=VARCHAR},
+      resno = #{resno,jdbcType=VARCHAR},
+      guestshare = #{guestshare,jdbcType=VARCHAR},
+      arrival = #{arrival,jdbcType=VARCHAR},
+      departure = #{departure,jdbcType=VARCHAR},
+      roomno = #{roomno,jdbcType=VARCHAR},
+      roomtype = #{roomtype,jdbcType=VARCHAR},
+      roomtypename = #{roomtypename,jdbcType=VARCHAR},
+      fname = #{fname,jdbcType=VARCHAR},
+      lname = #{lname,jdbcType=VARCHAR},
+      idcode = #{idcode,jdbcType=VARCHAR},
+      idno = #{idno,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      cardno = #{cardno,jdbcType=VARCHAR},
+      cardtype = #{cardtype,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      refundStatus = #{refundstatus,jdbcType=VARCHAR},
+      outtime = #{outtime,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
