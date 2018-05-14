@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="SelfMachine">
-    <output-path>K:/workSpaceWAR</output-path>
-    <root id="archive" name="SelfMachine.war">
-      <element id="artifact" artifact-name="SelfMachine:war exploded" />
-    </root>
-  </artifact>
-</component>
