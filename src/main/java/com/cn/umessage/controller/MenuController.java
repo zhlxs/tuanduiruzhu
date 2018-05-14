@@ -38,7 +38,7 @@ public class MenuController {
 
 	private static String namrname = "1111";
 	/**
-	 * 广告页
+	 * 广告页--
 	 * 
 	 * @param request
 	 * @return
