@@ -35,7 +35,8 @@ public class MenuController {
 	private IRoomOrderInfoService roomOrderInfoService;
 
 	private static Logger logger = Logger.getLogger(MenuController.class);
-	
+
+	private static String namrname = "1111";
 	/**
 	 * 广告页
 	 * 
