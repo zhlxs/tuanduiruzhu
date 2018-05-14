@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.apache.axis2:mex:impl:1.6.4">
+    <CLASSES>
+      <root url="jar://D:/Maven/repository/org/apache/axis2/mex/1.6.4/mex-1.6.4-impl.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://D:/Maven/repository/org/apache/axis2/mex/1.6.4/mex-1.6.4-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://D:/Maven/repository/org/apache/axis2/mex/1.6.4/mex-1.6.4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
