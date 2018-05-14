@@ -28,8 +28,8 @@ public class TestServicetdrzImpl implements TestServicetdrz {
             tt.setRoombigper("2");
             tt.setStarttime("2018-05-09");
             tt.setEndtime("2018-05-19");
-            tt.setNum("10");
-            tt.setPersoncount("20");
+            tt.setNum("10");//入住天数
+            tt.setPersoncount("20");//入住总人数
             arrayList.add(tt);
             //第二笔订单
             Testtdrz tt2 = new Testtdrz();
