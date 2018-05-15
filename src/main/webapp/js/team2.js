@@ -96,12 +96,12 @@ function skipRoomDetail(orderid) {
                 // var count = 0;
                 for (var i = 0; i < result.length; i++) {
                     if (result[i].count == "0") {
-                        html += "<div class='single before_lr' onclick='skipIdCard(" + result[i].roomname + ")'>";
+                        html += "<div class='single before_lr' onclick='putcard(" + result[i].roomname + ")'>";
                         html += "<h4>" + result[i].roomtype + "</h4>";
                         html += "<p>房间号:" + result[i].roomname + "</p>";
                         html += "</div>";
                     } else if (result[i].count == "1") {//已录入模块
-                        html += "<div class='single after_lr' onclick='skipIdCard2(" + result[i].roomname + ")'>";
+                        html += "<div class='single after_lr' onclick='putcard(" + result[i].roomname + ")'>";
                         html += "<h4>" + result[i].roomtype + "</h4>";
                         html += "<p>房间号:" + result[i].roomname + "</p>";
                         html += "</div>";
@@ -138,12 +138,12 @@ function skipRoomDetail2(orderid) {
                 // var count = 0;
                 for (var i = 0; i < result.length; i++) {
                     if (result[i].count == "0") {
-                        html += "<div class='single before_lr' onclick='skipIdCard(" + result[i].roomname + ")'>";
+                        html += "<div class='single before_lr' onclick='putcard(" + result[i].roomname + ")'>";
                         html += "<h4>" + result[i].roomtype + "</h4>";
                         html += "<p>房间号:" + result[i].roomname + "</p>";
                         html += "</div>";
                     } else if (result[i].count == "1") {//已录入模块
-                        html += "<div class='single after_lr' onclick='skipIdCard2(" + result[i].roomname + ")'>";
+                        html += "<div class='single after_lr' onclick='putcard(" + result[i].roomname + ")'>";
                         html += "<h4>" + result[i].roomtype + "</h4>";
                         html += "<p>房间号:" + result[i].roomname + "</p>";
                         html += "</div>";
@@ -164,42 +164,42 @@ function skipRoomDetail2(orderid) {
     })
 }
 
-function skipIdCard(roomname) {
-    $("#allRoom").hide();
-    $("#chooseNum").show();
-    $("#showChooseNum").html('<div class="p_nums" onclick="putcard(1,' + roomname + ')">'
-        + '1人'
-        + '</div>'
-        + '<div class="p_nums" onclick="putcard(2,' + roomname + ')">'
-        + '2人'
-        + '</div>');
-}
-
-function skipIdCard2(roomname) {
-    $("#allRoom").hide();
-    $("#chooseNum").show();
-    $("#showChooseNum").html('<div class="p_nums" onclick="putcard(1,' + roomname + ')">'
-        + '1人'
-        + '</div>');
-}
+// function skipIdCard(roomname) {
+//     $("#allRoom").hide();
+//     $("#chooseNum").show();
+//     $("#showChooseNum").html('<div class="p_nums" onclick="putcard(1,' + roomname + ')">'
+//         + '1人'
+//         + '</div>'
+//         + '<div class="p_nums" onclick="putcard(2,' + roomname + ')">'
+//         + '2人'
+//         + '</div>');
+// }
+//
+// function skipIdCard2(roomname) {
+//     $("#allRoom").hide();
+//     $("#chooseNum").show();
+//     $("#showChooseNum").html('<div class="p_nums" onclick="putcard(1,' + roomname + ')">'
+//         + '1人'
+//         + '</div>');
+// }
 
 //提示放身份证
-function putcard(num, roomname) {
-    number = num;
-    $("#chooseNum").hide();
+function putcard(roomname) {
+    number = 1;
+    $("#allRoom").hide();
     $("#idcard").show();
     $("#idcard").html('<p class="title">请在机器下方放置二代身份证</p>'
         + '<div>'
         + '<img src="' + getRootPath() + 'img/card.png" alt="">'
         + '</div>'
         + '<button class="remove" onclick=goIndex()>取消</button>');
-    putcard_time(roomname);//倒计时-->调用checkcard
+    putcard_time();//倒计时-->调用checkcard
 
 }
 
 
 //检测身份证
-function checkcard(roomname) {
+function checkcard() {
     $.ajax({
         type: "post",
         url: getRootPath() + "checkin/checkcardRorGroup",
@@ -214,7 +214,7 @@ function checkcard(roomname) {
                     + '<div id="gifcard"><img src="'
                     + getRootPath()
                     + 'img/new_blues.gif" alt=""></div>');
-                setTimeout("readcard(roomname)", 500);
+                setTimeout("readcard()", 500);
             } else {
 
             }
@@ -225,7 +225,7 @@ function checkcard(roomname) {
 }
 
 //读取身份证
-function readcard(roomname) {
+function readcard() {
     $.ajax({
         type: "post",
         url: getRootPath() + "checkin/readCardRorGroup",
@@ -236,7 +236,7 @@ function readcard(roomname) {
             console.log('成功');
             if (res == "ok") {
                 //采集照片
-                photo(roomname);
+                photo();
 
             } else {
                 $("#idcard").hide();
@@ -279,7 +279,7 @@ function readcard(roomname) {
 //新摄像头采集照片
 function photo() {
     $(".face_box").show();
-    $(".rooms_content").hide();
+    // $(".rooms_content").hide();
     $("#idcard").hide();
     $("#card_myModal").modal("hide");
     $("#nopp_myModal").modal("hide");
@@ -338,7 +338,8 @@ function firstcheckphoto(str) {
             if (res == "ok") {
 
                 $(".face_box").hide();
-                if (number == 1) {
+                    alert("入住成功")
+                /*if (number == 1) {
                     // roomcarding();
                     alert("入住成功")
                 }
@@ -346,7 +347,7 @@ function firstcheckphoto(str) {
                     alert("number==2")
                     current = 2;
                     secputcard();
-                }
+                }*/
             } else {
                 $(".face_box").hide();
                 $("#idcard").hide();
@@ -365,7 +366,7 @@ function firstcheckphoto(str) {
 
 }
 
-//第二入住人人证比对
+/*//第二入住人人证比对
 function seccheckphoto(str) {
     $.ajax({
         type: "post",
@@ -399,14 +400,14 @@ function seccheckphoto(str) {
 
 //提示第二入住人放身份证
 function secputcard() {
-    /*$("#idcard").show();
+    /!*$("#idcard").show();
     // $(".content_box").show();
     $("#card_myModal").modal("hide");
     $(".content_box").html('<p class="">请第二入住人在机器下方放置二代居民身份证</p>'
         + '<div> <img src="' + getRootPath()
         + 'img/card.png" alt=""></div>'
         + '<button class="remove" onclick=goIndex()>取消</button>');
-    secputcard_time();//倒计时*/
+    secputcard_time();//倒计时*!/
 alert("提示放入第二身份证")
     $("#idcard").show();
     $("#card_myModal").modal("hide");
@@ -488,7 +489,7 @@ function secreadcard() {
             });
         }
     });
-}
+}*/
 
 // $(".remove").on("click",function(){
 //     window.location.href=getRootPath()+"menu/index";
