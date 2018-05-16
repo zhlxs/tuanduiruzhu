@@ -9,6 +9,7 @@ function getRootPath() {
 function goIndex() {
     window.location.href=getRootPath()+"menu/index";
 }
+
 //不执行操作
 function noDo(){
 
@@ -476,6 +477,26 @@ function putcard_time(){
     num_card=30;
     countdown_card("countdown_1",goIndex,checkcard);//启动倒计时
 }
+function putcard_time3(){
+    isstart_police=0;//警方提示倒计时
+    isstart_cardfaild=0;//身份证读取失败倒计时
+    isstart_order=0;//单个订单显示倒计时
+    isstart_noorder=0;//无订单显示倒计时
+    isstart_twoorder=0;//多订单显示倒计时
+    isstart_photo=0;//拍照倒计时
+    isstart_photofaild=0;//拍照失败倒计时
+    isstart_idcardfaild=0;//身份证单次比对失败倒计时
+    isstart_roomcard=0;//房卡信息显示倒计时
+    isstart_roomcardfaild=0;//房卡制作失败倒计时
+    isstart_twoidcardfaild=0;//身份证多次比对倒计时
+    isstart_pay=0;//支付倒计时
+    isstart_payinfo=0;//支付详情倒计时
+    isstart_onlycard=0;//同一身份证提示倒计时
+
+    isstart_card=1;//放身份证提示倒计时
+    num_card=60;
+    countdown_card("countdown_1",goIndex3,checkcard);//启动倒计时
+}
 
 function putcard_time_close(){
     isstart_card=0;//放身份证提示倒计时
@@ -503,6 +524,30 @@ function readcardfail_time(){
     num_cardfaild=3;
     countdown_cardfaild("countdown_2",putcard,noDo);//启动倒计时
 }
+
+//读身份证失败倒计时
+function readcardfail_time2(){
+    isstart_police=0;//警方提示倒计时
+    isstart_card=0;//放身份证提示倒计时
+    isstart_order=0;//单个订单显示倒计时
+    isstart_noorder=0;//无订单显示倒计时
+    isstart_twoorder=0;//多订单显示倒计时
+    isstart_photo=0;//拍照倒计时
+    isstart_photofaild=0;//拍照失败倒计时
+    isstart_idcardfaild=0;//身份证单次比对失败倒计时
+    isstart_roomcard=0;//房卡信息显示倒计时
+    isstart_roomcardfaild=0;//房卡制作失败倒计时
+    isstart_twoidcardfaild=0;//身份证多次比对倒计时
+    isstart_pay=0;//支付倒计时
+    isstart_payinfo=0;//支付详情倒计时
+    isstart_onlycard=0;//同一身份证提示倒计时
+
+
+    isstart_cardfaild=1;//身份证读取失败倒计时
+    num_cardfaild=3;
+    countdown_cardfaild("countdown_2",fhRoomDetail,noDo);//启动倒计时
+}
+
 
 //手机号填写错误倒计时
 function mobilefail_time(){
@@ -766,7 +811,7 @@ function photo_time(){
 
     isstart_photo=1;//拍照倒计时
     num_photo=30;
-    countdown_photo("countdown_1",noDo,noDo);//启动倒计时
+    countdown_photo("countdown_1",closephoto2,noDo);//启动倒计时
 }
 
 function photo_time_close(){
@@ -796,7 +841,7 @@ function photofaild_time(){
 
     isstart_photofaild=1;//拍照失败倒计时
     num_photofaild=3;
-    countdown_photofaild("countdown_2",closephoto,noDo);//启动倒计时
+    countdown_photofaild("countdown_2",closephoto2,noDo);//启动倒计时
 }
 
 

@@ -2,10 +2,13 @@ package com.cn.umessage.service.impl;
 
 import com.cn.umessage.pojo.Testtdrz;
 import com.cn.umessage.service.TestServicetdrz;
+import org.apache.commons.collections.map.HashedMap;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class TestServicetdrzImpl implements TestServicetdrz {
@@ -54,5 +57,27 @@ public class TestServicetdrzImpl implements TestServicetdrz {
         }
         return null;
     }
+
+
+    /*public static void main(String[] args) throws Exception {
+        Map<String, String> hashMap = new HashedMap();
+        hashMap.put("1991--1001-哈哈", "0");
+        hashMap.put("1991--1002-哈哈", "0");
+        hashMap.put("1992--2001-思考开始", "0");
+        hashMap.put("1992--2002-大健康", "0");
+        System.out.println(hashMap);
+        Iterator<String> iter = hashMap.keySet().iterator();
+        while (iter.hasNext()) {
+            String key = iter.next();
+            String[] str = key.split("--");
+            if (str[0].equals("1991")) {
+                String[] split = str[1].split("-");
+                if (split[0].equals("1001")) {
+                    hashMap.put(key, String.valueOf(Integer.parseInt(hashMap.get(key))+1));
+                }
+            }
+        }
+        System.out.println(hashMap);
+    }*/
 
 }

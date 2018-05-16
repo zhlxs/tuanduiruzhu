@@ -238,7 +238,8 @@ public class CheckInController {
         if (o != null) {
             OrderInfo order = (OrderInfo) o;
             String queryString = order.getOrderNum() + "," + order.getOrderNumPMS();// 查询条件：订单号-预订单pms
-            logger.info("==========ordernum=============="
+            logger.info("" +
+                    ""
                     + queryString);
             PayInfo pay = pmsService.getPayInfo(queryString);//获取订单支付情况
             /*pay.setDeposit(0.01);
@@ -429,7 +430,7 @@ public class CheckInController {
     }
 
     /**
-     * 查询未入住订单(团队入住)-->支付-->获取可用房-->读取身份证-->采集照片并比对-->按订单录入、上传身份信息
+     * 查询未入住订单(团队入住)-->获取可用房-->选房-->读取身份证-->采集照片并比对-->按订单录入、上传身份信息
      *
      * @param phone
      * @return
@@ -437,14 +438,6 @@ public class CheckInController {
      */
     @ResponseBody
     @RequestMapping("/getGroupOrders")
-//	public List<OrderInfo> getGroupOrders(@RequestParam(value = "phone") String phone, Model model)throws Exception {
-//		List<OrderInfo> list = new ArrayList<>();//无订单
-//		list = pmsService.getOrder(phone);
-////		model.addAttribute("orderList",list);
-//		System.out.println(list);
-//		return list;
-//
-//	}
     public List<Testtdrz> getGroupOrders(@RequestParam(value = "phone") String phone, HttpServletRequest request) throws Exception {
         List<Testtdrz> orderList = testServicetdrz.getOrder(phone);
         Map<String, String> roomMap = new HashMap<>();
@@ -454,16 +447,23 @@ public class CheckInController {
                 for (int y = 0; y < roomStr.length; y++) {
                     roomMap.put(orderList.get(i).getOrderid() + "--" + roomStr[y], "0");
                 }
-
             }
         }
         request.getSession().setAttribute("roomMap", roomMap);
         return orderList;
     }
 
+    /**
+     * 获取可用房(团队入住)
+     *
+     * @param orderid
+     * @param request
+     * @return
+     */
+
     @ResponseBody
-    @RequestMapping(value = "testSession")
-    public List<ResultTest> getRoom(String orderid, HttpServletRequest request) {
+    @RequestMapping(value = "getGroupRoom")
+    public List<ResultTest> getGroupRoom(String orderid, HttpServletRequest request) {
         if (orderid != null && !orderid.equals("")) {
             request.getSession().setAttribute("orderId", orderid);
         }
@@ -484,86 +484,6 @@ public class CheckInController {
             }
         }
         return arrayList;
-    }
-
-    @ResponseBody
-    @RequestMapping(value = "testruzhu")
-    public List<ResultTest> ruzhu(String roomnum, String ruzhurenshu, String orderid, HttpServletRequest request) {
-        List<ResultTest> arrayList = new ArrayList<>();
-        Map<String, String> roomMap = (Map<String, String>) request.getSession().getAttribute("roomMap");
-        //带上选择好的入住人数,
-
-        //入住传pms,传psb
-
-
-        //如果入住成功,把对应房间号的入住人数加上
-        if (true) {
-            Iterator<String> iter = roomMap.keySet().iterator();
-            while (iter.hasNext()) {
-                String key = iter.next();
-                String[] str = key.split("--");
-                if (str[0].equals(orderid)) {
-                    String[] split = str[1].split("-");
-                    if (split[0].equals(roomnum)) {
-                        roomMap.put(key, ruzhurenshu);
-                    }
-                    ResultTest rt = new ResultTest();
-                    rt.setRoomname(split[0]);
-                    rt.setRoomtype(split[1]);
-                    rt.setCount(roomMap.get(key));
-                    arrayList.add(rt);
-                }
-            }
-
-        }
-        request.getSession().setAttribute("roomMap", roomMap);
-        return arrayList;
-    }
-
-//    public static void main(String[] args) throws Exception {
-//        Map<String, String> hashMap = new HashedMap();
-//        hashMap.put("1991--1001-哈哈", "0");
-//        hashMap.put("1991--1002-哈哈", "0");
-//        hashMap.put("1992--2001-思考开始", "0");
-//        hashMap.put("1992--2002-大健康", "0");
-//        System.out.println(hashMap);
-//        Iterator<String> iter = hashMap.keySet().iterator();
-//        while (iter.hasNext()) {
-//            String key = iter.next();
-//            String[] str = key.split("--");
-//            if (str[0].equals("1991")) {
-//                String[] split = str[1].split("-");
-//                if (split[0].equals("1001")) {
-//                    hashMap.put(key, "1");
-//                }
-//            }
-//        }
-//        System.out.println(hashMap);
-//    }
-
-    /**
-     * 获取可用房(团队入住)
-     *
-     * @param
-     * @param inTime
-     * @param outTime
-     * @param orderNo
-     * @param model
-     * @return
-     * @throws Exception
-     */
-    @ResponseBody
-    @RequestMapping("/getAvailableRoom")
-    public List<AvailableRoom> getAvailableRoom(
-
-            @RequestParam(value = "roomCode") String roomCode,
-            @RequestParam(value = "inTime") String inTime,
-            @RequestParam(value = "outTime") String outTime,
-            @RequestParam(value = "orderNo") String orderNo, Model model) throws Exception {
-        List<AvailableRoom> availableRoomList = pmsService.getAvailableRoomForGroup(inTime, outTime, roomCode);//获取可用房间
-//		model.addAttribute("availableRoomList",availableRoomList);
-//		model.addAttribute("orderNo",orderNo);
-        return availableRoomList;
     }
 
     /**
@@ -594,51 +514,29 @@ public class CheckInController {
      * @return
      * @throws Exception
      */
-    @RequestMapping("/readCardRorGroup")
     @ResponseBody
-    public String readCardRorGroup(String roomname,HttpServletRequest request) throws Exception {
+    @RequestMapping("/readCardRorGroup")
+    public String readCardRorGroup(String roomnum, HttpServletRequest request) throws Exception {
         IdCard idCard = cardService.read();//读取团队入住人身份证信息
         cardService.closePort();//关闭身份证读卡器端
         if (idCard != null) {//读取成功
+            //判断团队入住身份证是否相同
+            String orderid = (String)request.getSession().getAttribute("orderId");
+            ArrayList<IdCard> arrayListIdCard = (ArrayList<IdCard>) request.getSession().getAttribute("arrayListIdCard"+orderid);
+            if (null != arrayListIdCard && arrayListIdCard.size() > 0) {
+                for (int i = 0; i < arrayListIdCard.size(); i++) {
+                    if (arrayListIdCard.get(i).getCardNum().equals(idCard.getCardNum())) {
+                        return "chongfu";
+                    }
+                }
+            }
             request.getSession().setAttribute("idCardForGroup", idCard);// session中放入团队入住人信息
-            request.getSession().setAttribute("roomnumber",roomname);//要住的房间号存到session
+            request.getSession().setAttribute("roomnum", roomnum);//要住的房间号存到session
             return "ok";
         } else {//读取失败
             request.getSession().removeAttribute("idCardForGroup");
             return "fail";
         }
-    }
-
-    /**
-     * 第二入住人读取身份证(团队入住)
-     *
-     * @param request
-     * @return
-     * @throws Exception
-     */
-    @RequestMapping("/secreadcardRorGroup")
-    @ResponseBody
-    public String secreadcardRorGroup(HttpServletRequest request) throws Exception {
-        IdCard secondIdCard = cardService.read();//读取第二入住人身份证信息
-        cardService.closePort();//关闭身份证读卡器端口
-        if (secondIdCard != null) {//读取成功
-            Object o = request.getSession().getAttribute("firstIdCard");
-            if (o != null) {
-                IdCard firstIdCard = (IdCard) o;
-                if (secondIdCard.getCardNum().equals(firstIdCard.getCardNum())) {//判断第一入住人和第二入住人是否相同
-                    return "same";//第一入住人和第二入住人相同，提示错误信息
-                } else {
-                    request.getSession().setAttribute("secondIdCard",
-                            secondIdCard);// session中放入第二入住人信息
-                    return "ok";
-                }
-            }
-
-        } else {//读取失败
-            request.getSession().removeAttribute("secondIdCard");
-            return "fail";
-        }
-        return "fail";
     }
 
     /**
@@ -652,13 +550,14 @@ public class CheckInController {
     @ResponseBody
     public String checkphotoForGroup(HttpServletRequest request) throws Exception {
         System.out.println("--------------------  第一入住人------------------------");
+        String orderid = (String) request.getSession().getAttribute("orderId");
         String str = request.getParameter("str");
         String photoStr = str;
         IdCard idCard = request.getSession().getAttribute("idCardForGroup") == null ? null :
                 (IdCard) request.getSession().getAttribute("idCardForGroup");
         if (idCard != null) {
-            personCardService.savePhoto(idCard.getCardNum(), photoStr, "000001", "getcard");
-            if (personCardService.Comparison(idCard.getCardNum(), "000001", "getcard", idCard)) {
+            personCardService.savePhoto(idCard.getCardNum(), photoStr, orderid, "getcard");
+            if (personCardService.Comparison(idCard.getCardNum(), orderid, "getcard", idCard)) {
                 return "ok";
             } else {
                 return "fail";
@@ -668,61 +567,60 @@ public class CheckInController {
     }
 
     /**
-     * 第二入住人采集照片并比对(团队入住)
-     *
-     * @param request
-     * @return
-     * @throws Exception
-     */
-    @RequestMapping("/seccheckphotoForGroup")
-    @ResponseBody
-    public String seccheckphotoForGroup(HttpServletRequest request) throws Exception {
-        String str = request.getParameter("str");
-
-        String photoStr = str;//str.split("<imgBase>")[1].split("</imgBase>")[0];
-        IdCard idCard = request.getSession().getAttribute("secondIdCard") == null ? null
-                : (IdCard) request.getSession().getAttribute("secondIdCard");
-        OrderInfo order = request.getSession().getAttribute("order") == null ? null
-                : (OrderInfo) request.getSession().getAttribute("order");
-        if (idCard != null && order != null) {
-            personCardService.savePhoto(idCard.getCardNum(), photoStr, "000001", "getcard");
-            if (personCardService.Comparison(idCard.getCardNum(), "000001", "getcard", idCard)) {
-
-                return "ok";
-            } else {
-                return "fail";
-            }
-        }
-        return "fail";
-    }
-
-   /* *//**
      * 按订单录入、上传身份信息（团队入住）
      *
      * @param request
      * @return
-     * @throws Exception
-     *//*
-    @RequestMapping("/checkInForGroup")
+     */
     @ResponseBody
-    public CheckInInfo checkInForGroup(@RequestBody OrderInfo order, HttpServletRequest request) throws Exception {
-        CheckInInfo checkIn = null;
-        IdCard idCard = request.getSession().getAttribute("idCardForGroup") == null ? null :
-                (IdCard) request.getSession().getAttribute("idCardForGroup");
-        pmsService.updateOrderInfo(idCard, order.getOrderNumPMS());//更改主单证件信息
+    @RequestMapping(value = "groupCheckIn")
+    public List<ResultTest> groupCheckIn(HttpServletRequest request) {
+        List<ResultTest> arrayList = new ArrayList<>();
+        //session中的orderid 订单号
+        String orderid = (String) request.getSession().getAttribute("orderId");
+        //session中的roomnum 房间号
+        String roomnum = (String) request.getSession().getAttribute("roomnum");
+        //session中的map 房间信息
+        Map<String, String> roomMap = (Map<String, String>) request.getSession().getAttribute("roomMap");
+        //带上选择好的入住人数,
 
-        logger.info("========客户姓名===" + idCard.getName());
-        logger.info("========ordernum===" + order.getOrderNum());
+        //入住传pms,传psb
 
-        String roomno = pmsService.checkIn(idCard, order);//办理入住，得到房间号
-        logger.info("=============roomno==============" + roomno);
-        checkIn = new CheckInInfo();
-        checkIn.setRoomNum((order.getRoomNum() != null && !"".equals(order.getRoomNum())) ? order.getRoomNum() : roomno);
-        checkIn.setOrderNum(order.getOrderNum());
-        checkIn.setInTime(order.getInTime());
-        checkIn.setOutTime(order.getOutTime());
-        return checkIn;
-    }*/
+        //如果入住成功,把对应房间号的入住人数加上
+        if (true) {
+            //把入住成功的身份证存到 session中的 arrayList里面 读取身份证的时候判断是否存在
+            IdCard idCard = (IdCard) request.getSession().getAttribute("idCardForGroup");
+            ArrayList<IdCard> arrayListIdCard = (ArrayList<IdCard>) request.getSession().getAttribute("arrayListIdCard"+orderid);
+            if (null != arrayListIdCard && arrayListIdCard.size() > 0) {
+                arrayListIdCard.add(idCard);
+                request.getSession().setAttribute("arrayListIdCard"+orderid, arrayListIdCard);
+            } else {
+                ArrayList<IdCard> arrayListId = new ArrayList<>();
+                arrayListId.add(idCard);
+                request.getSession().setAttribute("arrayListIdCard"+orderid, arrayListId);
+            }
+            //增加入住人数.并返回arrayList给前台.
+            Iterator<String> iter = roomMap.keySet().iterator();
+            while (iter.hasNext()) {
+                String key = iter.next();
+                String[] str = key.split("--");
+                if (str[0].equals(orderid)) {
+                    String[] split = str[1].split("-");
+                    if (split[0].equals(roomnum)) {
+                        roomMap.put(key, String.valueOf(Integer.parseInt(roomMap.get(key)) + 1));
+
+                    }
+                    ResultTest rt = new ResultTest();
+                    rt.setRoomname(split[0]);
+                    rt.setRoomtype(split[1]);
+                    rt.setCount(roomMap.get(key));
+                    arrayList.add(rt);
+                }
+            }
+        }
+        request.getSession().setAttribute("roomMap", roomMap);
+        return arrayList;
+    }
 
     /**
      * 根据房卡查询入住单

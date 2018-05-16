@@ -26,8 +26,8 @@
     <div class="content">
         <div class="times clearfix">
             <div class="fl left">
-                    <span id="date_1" class="time_ymd"></span>&nbsp;&nbsp; <span
-                        id="time_1"></span>
+                <span id="date_1" class="time_ymd"></span>&nbsp;&nbsp; <span
+                    id="time_1"></span>
             </div>
             <div class="fr right">
                 <span id="week_1" class="todays"></span>
@@ -39,9 +39,9 @@
                     <span class="icons"></span>&nbsp;&nbsp;<span>首页</span>
                 </a>
             </div>
-            <div class="fr right ">
+            <!-- <div class="fr right ">
                 <span class="" id="countdown_1"></span>
-            </div>
+            </div> -->
         </div>
 
         <!-- 订单信息 -->
@@ -51,7 +51,7 @@
 
             </div>
             <div class="footer">
-                <input type="button" value="关闭" class="btn_gb">
+                <input type="button" value="返回" class="btn_gb" onclick="fanhuishoujihao()">
                 <%--<input type="button" value="确定" class="btn_qd">--%>
             </div>
         </div>
@@ -120,7 +120,7 @@
 
             </div>
             <div class="footer">
-                <input type="button" value="关闭" class="btn_gb">
+                <input type="button" value="返回" class="btn_gb" onclick="fanhuiorders()">
                 <input type="button" value="确定" class="btn_qd">
             </div>
         </div>
@@ -142,7 +142,7 @@
                     </div>--%>
                 </div>
                 <!-- <div class="footer_btn"> -->
-                <input type="button" class="btn_choose_back" onclick="skipRoomDetail2()" value="返回">
+                <input type="button" class="btn_choose_back" onclick="skipRoomDetail()" value="返回">
                 <%--<input type="button" class="btn_choose_sure" value="确定">--%>
                 <!-- </div> -->
             </div>
@@ -185,7 +185,7 @@
                         <p>身份证读取失败，请重新读取</p>
                     </div>
                     <div class="modal-footer">
-                        <button id="sfrzgb" type="button" class="btn btn-default again_btn" data-dismiss="modal">关闭</button>
+                        <button id="sfrzgb" type="button" class="btn btn-default again_btn" data-dismiss="modal">返回</button>
                     </div>
                 </div>
             </div>
@@ -206,7 +206,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default again_btn" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-default again_btn" data-dismiss="modal">头像不匹配</button>
                     </div>
                 </div>
             </div>
@@ -270,19 +270,19 @@
     $(".back_num").on("click",function(){
         window.location.href="<%=basePath%>menu/index";
     })
-    $(".btn_gb").on("click",function(){
+    <%--$(".btn_gb").on("click",function(){--%>
+    <%--window.location.href="<%=basePath%>menu/index";--%>
+    <%--})--%>
+    /*$("#sfrzgb").on("click",function(){
         window.location.href="<%=basePath%>menu/index";
-    })
-    $("#sfrzgb").on("click",function(){
-        window.location.href="<%=basePath%>menu/index";
-    })
+    })*/
     <%--$(".remove").on("click",function(){--%>
-        <%--window.location.href="<%=basePath%>menu/index";--%>
+    <%--window.location.href="<%=basePath%>menu/index";--%>
     <%--})--%>
 </script>
 <%--<script type="text/javascript">--%>
 
-    <%--putcard();--%>
+<%--putcard();--%>
 <%--</script>--%>
 <script type="text/javascript" src="<%=basePath%>js/time.js"></script>
 </body>
